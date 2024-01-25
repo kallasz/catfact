@@ -1,0 +1,36 @@
+* {
+  font-family: 'Lexend', sans-serif;
+  margin: 0px;
+}
+html {
+  height: 100vh;
+}
+body {
+  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='30' height='36' viewport='0 0 100 100' style='fill:black;font-size:18px;'><text y='50%'>🐱‍👤</text></svg>") 16 0,auto; /*!emojicursor.app*/
+  background-color: rgb(19, 19, 19);
+  color: rgb(218, 218, 218);
+  height: 100%;
+}
+header {
+  background-color: rgb(14, 14, 14);
+  padding: 10px 20px;
+  height: 60px;
+  box-sizing: border-box;
+}
+header h1 {
+  font-size: 30px;
+}
+main {
+  background-color: rgb(32, 32, 32);
+
+  display: flex;
+  justify-content: center;
+}
+.layout {
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  height: calc(100% - 60px);
+}
+.layout main, .layout div {
+  padding: 10px;
+}
