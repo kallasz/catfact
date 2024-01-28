@@ -39,6 +39,14 @@ main #contentbar {
   flex-direction: column;
 
 }
+a {
+  text-decoration: none;
+  color: rgb(0, 174, 255);
+}
+a:hover {
+  color: rgb(0, 200, 255);
+  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='30' height='36' viewport='0 0 100 100' style='fill:black;font-size:18px;'><text y='50%'>🐱‍🏍</text></svg>") 16 0,auto !important;
+}
 .layout {
   display: grid;
   grid-template-columns: 25% 50% 25%;
@@ -72,8 +80,12 @@ button {
   user-select: none !important;
 }
 button:hover {
-  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='30' height='36' viewport='0 0 100 100' style='fill:black;font-size:18px;'><text y='50%'>🐱‍🏍</text></svg>") 16 0,auto !important; /*!emojicursor.app*/
+  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='30' height='36' viewport='0 0 100 100' style='fill:black;font-size:18px;'><text y='50%'>🐱‍🏍</text></svg>") 16 0,auto !important;
   background-color: rgb(79, 79, 79) !important;
+}
+button:disabled {
+  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='30' height='36' viewport='0 0 100 100' style='fill:black;font-size:18px;'><text y='50%'>😾</text></svg>") 16 0,auto !important;
+  background-color: rgb(45, 45, 45) !important;
 }
 .hidden {
   display: none !important;
@@ -81,7 +93,7 @@ button:hover {
 #historylist {
   list-style: none;
   padding: 0px;
-  height: calc(100vh - 160px);
+  height: calc(100vh - 210px);
   overflow-y: auto;
   margin-top: 20px;
 }
@@ -117,6 +129,21 @@ button:hover {
   /* width: 50%; */
   display: inline-block;
 }
+#starredchip {
+  all: unset;
+  display: flex;
+  align-items: center;
+  background-color: rgb(42, 42, 42);
+  padding: 5px;
+}
+.h2-with-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#starredchip.active {
+  background-color: rgb(98, 98, 98) !important;
+}
 
 @media screen and (width <= 999px) {
   .layout {
@@ -142,15 +169,16 @@ button:hover {
     all: unset;
     display: flex;
     width: 100%;
-    max-width: 100px;
+    max-width: 150px;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
   }
   .mobile-nav-btn:hover {
-    background-color: rgb(27, 27, 27);
+    background-color: rgb(44, 44, 44);
   }
   .mobile-nav-btn-active {
-    background-color: rgb(42, 42, 42) !important;
+    background-color: rgb(65, 65, 65) !important;
   }
 }
 
@@ -162,6 +190,6 @@ button:hover {
     display: block !important;
   }
   main {
-    display: flex;
+    display: flex !important;
   }
 }

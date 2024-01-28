@@ -33,7 +33,9 @@
 
     <div id="about">
       <h2>About</h2>
-
+      <p>Showing random cat facts using <a href="https://catfact.ninja" target="_blank">catfact.ninja</a>.</p>
+      <p>This website stores the history locally.</p>
+      <p>Found an error? Open an issue: <a href="https://github.com/kallasz/catfact/issues" target="_blank">kallasz/catfact</a>.</p>
     </div>
 
     <main>
@@ -53,16 +55,16 @@
     </main>
 
     <div class="historytab">
-      <h2>History</h2>
+      <h2 class="h2-with-btn">History <button id="starredchip" onclick="filterstarred()"><span class="material-symbols-rounded">star_half</span></button></h2>
       <ul id="historylist"></ul>
     </div>
 
   </div>
 
   <div id="mobile-nav" class="hidden">
-    <button class="mobile-nav-btn" data-for="#about" onclick="changetab('#about')">About</button>
-    <button class="mobile-nav-btn" data-for="main" onclick="changetab('main')">Cat Fact</button>
-    <button class="mobile-nav-btn" data-for=".historytab" onclick="changetab('.historytab')">History</button>
+    <button class="mobile-nav-btn" data-for="#about" onclick="changetab('#about')"><span class="material-symbols-rounded">info</span>ABOUT</button>
+    <button class="mobile-nav-btn" data-for="main" onclick="changetab('main')"><span class="material-symbols-rounded">menu_book</span>CAT FACT</button><!--<span class="material-symbols-rounded">pets</span>-->
+    <button class="mobile-nav-btn" data-for=".historytab" onclick="changetab('.historytab')"><span class="material-symbols-rounded">schedule</span>HISTORY</button><!--<span class="material-symbols-rounded">history</span>-->
   </div>
 </body>
 </html>

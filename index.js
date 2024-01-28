@@ -70,7 +70,10 @@ class FactHistory {
           </li>
       `;
       
-      historylist.innerHTML += html;
+      if ((starredchip.classList.contains("active") && v.starred) || !starredchip.classList.contains("active")) {
+        historylist.innerHTML += html;
+        
+      }
     });
     
   }
@@ -94,8 +97,10 @@ const changetab = (to) => {
   document.querySelectorAll(".mobile-nav-btn").forEach((e, i) => {
     if (e.dataset.for == to) {
       e.classList.add("mobile-nav-btn-active");
+      e.querySelector("span").classList.add("icon-fill");
     } else {
       e.classList.remove("mobile-nav-btn-active");
+      e.querySelector("span").classList.remove("icon-fill");
     }
   });
 }
@@ -119,6 +124,7 @@ window.onload = async () => {
 }
 
 const getnew = async () => {
+  getnewbtn.disabled = true;
   const res = await (await fetch("https://catfact.ninja/fact")).json();
   fact.innerText = res.fact;
   if (!fh.has(res.fact)) {
@@ -131,10 +137,17 @@ const getnew = async () => {
 
     fh.add({ fact: res.fact, starred: false });
   }
+  getnewbtn.disabled = false;
 }
 
 const wayback = (i) => {
   fact.innerText = fh.h[i].fact;
   currentfactbtn.dataset.i = i;
+  fh.render();
+}
+
+const filterstarred = () => {
+  starredchip.classList.toggle("active");
+
   fh.render();
 }
