@@ -7,7 +7,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
-  
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <style>
+    .icon-fill {
+      font-variation-settings:
+      'FILL' 1,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+    }
+  </style>
+
   <title>Cat Facts</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐱‍👤</text></svg>">
 
@@ -16,7 +27,7 @@
   <script src="index.js" defer></script>
 </head>
 <body>
-  <header><h1>cat facts 🐱‍👤</h1></header>
+  <header><h1>cat facts 🐈</h1></header>
 
   <div class="layout">
 
@@ -26,19 +37,32 @@
     </div>
 
     <main>
-      <h1>Cat Fact</h1>
-      <p id="fact">
-        Tabby cats are thought to get their name from Attab, a district in Baghdad, now the capital of Iraq.
-      </p>
+      <div class="hidden" id="noitem">
+        <h1>No cats for you 🐈</h1>
+      </div>
+
+      <div id="contentbar">
+        <h1>Cat Fact</h1>
+        <p id="fact"></p>
+      </div>
+
+      <div id="actionbar">
+        <button onclick="fh.rstar(currentfactbtn.dataset.i)" id="currentfactbtn" data-i="0"><span class="material-symbols-rounded" id="starcurrentfactspan">star</span></button>
+        <button onclick="getnew()" id="getnewbtn">GET NEW</button>
+      </div>
     </main>
 
     <div class="historytab">
       <h2>History</h2>
-      <ul id="historylist">
-
-      </ul>
+      <ul id="historylist"></ul>
     </div>
 
+  </div>
+
+  <div id="mobile-nav" class="hidden">
+    <button class="mobile-nav-btn" data-for="#about" onclick="changetab('#about')">About</button>
+    <button class="mobile-nav-btn" data-for="main" onclick="changetab('main')">Cat Fact</button>
+    <button class="mobile-nav-btn" data-for=".historytab" onclick="changetab('.historytab')">History</button>
   </div>
 </body>
 </html>
