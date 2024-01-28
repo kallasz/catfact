@@ -48,9 +48,17 @@
         <p id="fact"></p>
       </div>
 
-      <div id="actionbar">
-        <button onclick="fh.rstar(currentfactbtn.dataset.i)" id="currentfactbtn" data-i="0"><span class="material-symbols-rounded" id="starcurrentfactspan">star</span></button>
-        <button onclick="getnew()" id="getnewbtn">GET NEW</button>
+      <div id="actionbar" data-i="0">
+        <div>
+          <button onclick="wayback(actionbar.dataset.i - 1)" id="back"><span class="material-symbols-rounded">arrow_back</span></button>
+          <button onclick="wayback(actionbar.dataset.i - -1)" id="forward"><span class="material-symbols-rounded">arrow_forward</span></button>
+          <span id="historycount"></span>
+        </div>
+        <div>
+          <button onclick="fh.remove(actionbar.dataset.i)" id="removecurrentfactbtn"><span class="material-symbols-rounded">delete</span></button>
+          <button onclick="fh.rstar(actionbar.dataset.i)" id="currentfactbtn"><span class="material-symbols-rounded" id="starcurrentfactspan">star</span></button>
+          <button onclick="getnew()" id="getnewbtn">GET NEW</button>
+        </div>
       </div>
     </main>
 

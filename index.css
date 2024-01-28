@@ -30,6 +30,7 @@ main {
   
   padding-top: 40px !important;
   justify-content: space-between;
+  gap: 20px;
 }
 main #contentbar {
   display: flex;
@@ -37,6 +38,7 @@ main #contentbar {
   gap: 20px;
   align-items: center;
   flex-direction: column;
+
 
 }
 a {
@@ -51,7 +53,7 @@ a:hover {
   display: grid;
   grid-template-columns: 25% 50% 25%;
   height: calc(100vh - 60px);
-  overflow: hidden;
+  overflow: auto;
 }
 .layout main, .layout>div {
   padding: 20px;
@@ -65,8 +67,16 @@ a:hover {
   background-color: rgb(48, 48, 48);
   width: 100%;
   padding: 20px;
-  justify-content: end;
+  justify-content: space-between;
   gap: 5px;
+}
+#actionbar div {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+#historycount {
+  padding-left: 10px;
 }
 #actionbar button {
   all: unset;
@@ -75,9 +85,16 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  align-self: stretch;
+  height: 24px;
+}
+#actionbar button span:only-child {
+  width: 24px !important;
 }
 button {
   user-select: none !important;
+  display: inline-flex !important;
+  overflow: hidden !important;
 }
 button:hover {
   cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='30' height='36' viewport='0 0 100 100' style='fill:black;font-size:18px;'><text y='50%'>🐱‍🏍</text></svg>") 16 0,auto !important;
@@ -89,6 +106,11 @@ button:disabled {
 }
 .hidden {
   display: none !important;
+}
+
+.historytab {
+  height: calc(100vh - 120px);
+  box-sizing: border-box;
 }
 #historylist {
   list-style: none;
@@ -144,11 +166,14 @@ button:disabled {
 #starredchip.active {
   background-color: rgb(98, 98, 98) !important;
 }
+#starredchip {
+  width: 24px;
+}
 
 @media screen and (width <= 999px) {
   .layout {
     grid-template-columns: auto;
-    height: calc(100vh - 120px);
+    height:  calc(100vh - 120px);
   }
   /* #about {
     display: none;

@@ -21,15 +21,15 @@ class FactHistory {
     this.h.splice(i, 1);
     localStorage.setItem("history", JSON.stringify(this.h));
     
-    if (0 < i && i < this.h.length) {
-      currentfactbtn.dataset.i -= 1;
-      fact.innerHTML = this.h[currentfactbtn.dataset.i].fact;
-    }
+    // if (0 < i && i < this.h.length) {
+    //   actionbar.dataset.i -= 1;
+    //   fact.innerHTML = this.h[actionbar.dataset.i].fact;
+    // }
 
-    if (this.h.length == 0) {
-      contentbar.classList.add("hidden");
-      noitem.classList.remove("hidden");
-    }
+    // if (this.h.length == 0) {
+    //   contentbar.classList.add("hidden");
+    //   noitem.classList.remove("hidden");
+    // }
 
     this.render();
   }
@@ -41,38 +41,69 @@ class FactHistory {
   }
   render () {
     historylist.innerHTML = "";
-    
-    // if (this.h[currentfactbtn.dataset.i]?.fact != fact.innerText && fact.innerText != "") {
-    //   // fact deleted, or added
-    //   currentfactbtn.dataset.i -= 1;
-    //   fact.innerHTML = this.h[currentfactbtn.dataset.i].fact;
+   
+    // if (0 <= actionbar.dataset.i && actionbar.dataset.i < this.h.length) {
+    //   currentfactbtn.classList.remove("hidden");
+    //   starcurrentfactspan.classList = `material-symbols-rounded ${this.h[actionbar.dataset.i].starred && "icon-fill"}`;
     // }
-    
-    if (0 <= currentfactbtn.dataset.i && currentfactbtn.dataset.i < this.h.length) {
+    // else if (actionbar.dataset.i != 0 && this.h.length != 0) {
+    //   currentfactbtn.classList.add("hidden");
+    //   actionbar.dataset.i -= 1;
+    //   fact.innerHTML = this.h[actionbar.dataset.i].fact;
+    // } else if (actionbar.dataset.i == 0 && this.h.length != 0) {
+    //   currentfactbtn.classList.add("hidden");
+    //   fact.innerHTML = this.h[actionbar.dataset.i].fact;
+    // }
+
+    if (this.h.length > 0) {
+      noitem.classList.add("hidden");
+      contentbar.classList.remove("hidden");
       currentfactbtn.classList.remove("hidden");
-      starcurrentfactspan.classList = `material-symbols-rounded ${this.h[currentfactbtn.dataset.i].starred && "icon-fill"}`;
+      removecurrentfactbtn.classList.remove("hidden");
+
+      if (actionbar.dataset.i == this.h.length && this.h.length != 0) {
+        actionbar.dataset.i -= 1;
+        fact.innerText = this.h[actionbar.dataset.i].fact;
+      }
+      else if (this.h.length != 0) {
+        fact.innerText = this.h[actionbar.dataset.i].fact;
+      }
+      starcurrentfactspan.classList = `material-symbols-rounded ${this.h[actionbar.dataset.i].starred && "icon-fill"}`;
     }
-    else if (currentfactbtn.dataset.i != 0 && this.h.length != 0) {
+    else if (this.h.length == 0) {
+      fact.innerText = "";
+      noitem.classList.remove("hidden");
+      contentbar.classList.add("hidden");
       currentfactbtn.classList.add("hidden");
-      currentfactbtn.dataset.i -= 1;
-      fact.innerHTML = this.h[currentfactbtn.dataset.i].fact;
-    } else if (currentfactbtn.dataset.i == 0 && this.h.length != 0) {
-      currentfactbtn.classList.add("hidden");
-      fact.innerHTML = this.h[currentfactbtn.dataset.i].fact;
+      removecurrentfactbtn.classList.add("hidden");
+    }
+
+
+    historycount.innerText = this.h.length != 0 ? `${actionbar.dataset.i - -1}/${this.h.length}` : "";
+    if (actionbar.dataset.i == 0) {
+      back.disabled = true;
+    }
+    else {
+      back.disabled = false;
+    }
+    if (actionbar.dataset.i - -1 == this.h.length || this.h.length == 0) {
+      forward.disabled = true;
+    }
+    else {
+      forward.disabled = false;
     }
 
     this.h.map((v, i) => {
       let html = `
-        <li data-i=${i} onclick="wayback(${i})" class="${currentfactbtn.dataset.i == i && "chosen-fact"}">
-        <span>${v.fact}</span>
-        <button><span class="material-symbols-rounded ${v.starred && "icon-fill"}" onclick="fh.rstar(${i}); event.stopPropagation();">star</span></button>
-          <button><span class="material-symbols-rounded" onclick="fh.remove(${i}); event.stopPropagation();">delete</span></button>
-          </li>
+        <li data-i=${i} onclick="wayback(${i})" class="${actionbar.dataset.i == i && "chosen-fact"}">
+          <span>${v.fact}</span>
+          <button onclick="fh.rstar(${i}); event.stopPropagation();"><span class="material-symbols-rounded ${v.starred && "icon-fill"}">star</span></button>
+          <button onclick="fh.remove(${i}); event.stopPropagation();"><span class="material-symbols-rounded">delete</span></button>
+        </li>
       `;
       
       if ((starredchip.classList.contains("active") && v.starred) || !starredchip.classList.contains("active")) {
         historylist.innerHTML += html;
-        
       }
     });
     
@@ -128,21 +159,22 @@ const getnew = async () => {
   const res = await (await fetch("https://catfact.ninja/fact")).json();
   fact.innerText = res.fact;
   if (!fh.has(res.fact)) {
-    currentfactbtn.dataset.i = 0;
+    actionbar.dataset.i = 0;
 
-    if (fh.h.length == 0) {
-      contentbar.classList.remove("hidden");
-      noitem.classList.add("hidden");
-    }
+    // if (fh.h.length == 0) {
+    //   contentbar.classList.remove("hidden");
+    //   noitem.classList.add("hidden");
+    // }
 
     fh.add({ fact: res.fact, starred: false });
+    fh.render();
   }
   getnewbtn.disabled = false;
 }
 
 const wayback = (i) => {
   fact.innerText = fh.h[i].fact;
-  currentfactbtn.dataset.i = i;
+  actionbar.dataset.i = i;
   fh.render();
 }
 
