@@ -217,4 +217,7 @@ button:disabled {
   main {
     display: flex !important;
   }
+  main.hidden {
+    display: flex !important;
+  }
 }
