@@ -20,16 +20,6 @@ class FactHistory {
   remove (i) {
     this.h.splice(i, 1);
     localStorage.setItem("history", JSON.stringify(this.h));
-    
-    // if (0 < i && i < this.h.length) {
-    //   actionbar.dataset.i -= 1;
-    //   fact.innerHTML = this.h[actionbar.dataset.i].fact;
-    // }
-
-    // if (this.h.length == 0) {
-    //   contentbar.classList.add("hidden");
-    //   noitem.classList.remove("hidden");
-    // }
 
     this.render();
   }
@@ -41,19 +31,6 @@ class FactHistory {
   }
   render () {
     historylist.innerHTML = "";
-   
-    // if (0 <= actionbar.dataset.i && actionbar.dataset.i < this.h.length) {
-    //   currentfactbtn.classList.remove("hidden");
-    //   starcurrentfactspan.classList = `material-symbols-rounded ${this.h[actionbar.dataset.i].starred && "icon-fill"}`;
-    // }
-    // else if (actionbar.dataset.i != 0 && this.h.length != 0) {
-    //   currentfactbtn.classList.add("hidden");
-    //   actionbar.dataset.i -= 1;
-    //   fact.innerHTML = this.h[actionbar.dataset.i].fact;
-    // } else if (actionbar.dataset.i == 0 && this.h.length != 0) {
-    //   currentfactbtn.classList.add("hidden");
-    //   fact.innerHTML = this.h[actionbar.dataset.i].fact;
-    // }
 
     if (this.h.length > 0) {
       noitem.classList.add("hidden");
@@ -77,7 +54,6 @@ class FactHistory {
       currentfactbtn.classList.add("hidden");
       removecurrentfactbtn.classList.add("hidden");
     }
-
 
     historycount.innerText = this.h.length != 0 ? `${actionbar.dataset.i - -1}/${this.h.length}` : "";
     if (actionbar.dataset.i == 0) {
@@ -160,11 +136,6 @@ const getnew = async () => {
   fact.innerText = res.fact;
   if (!fh.has(res.fact)) {
     actionbar.dataset.i = 0;
-
-    // if (fh.h.length == 0) {
-    //   contentbar.classList.remove("hidden");
-    //   noitem.classList.add("hidden");
-    // }
 
     fh.add({ fact: res.fact, starred: false });
     fh.render();
